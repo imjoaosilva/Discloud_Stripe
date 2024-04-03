@@ -1,14 +1,31 @@
 <script>
     import {total} from '../stores/cart';
-    import MdArrowBack from 'svelte-icons/md/MdArrowBack.svelte'
     import ProductList from "./ProductList.svelte";
+    import {onMount} from "svelte";
+
+    onMount(() => {
+        function footer() {
+            const scrollPos = window.scrollY;
+            const windowH = window.innerHeight;
+            const docH = document.body.offsetHeight;
+            const footer = document.querySelector('footer');
+
+            if(scrollPos + windowH >= docH) {
+                footer.classList.add('hidden');
+            } else {
+                footer.classList.remove('hidden');
+            }
+        }
+
+        window.addEventListener('scroll', footer);
+    });
 </script>
 
-<div class='flex flex-row'>
+<div class='flex xl:flex-row flex-col'>
     <main
-        class='w-1/2 h-screen bg-gradient-to-r from-transparent via-transparent to-gray-50'
+        class='w-full xl:w-1/2 xl:h-screen bg-gradient-to-r from-transparent via-transparent to-gray-50'
     >
-        <div class='mt-40 mx-36'>
+        <div class='mx-6 mt-14 xl:mt-40 xl:mx-36'>
 
             <div class='flex flex-col justify-center'>
                 <div class='flex flex-row items-center'>
@@ -24,21 +41,18 @@
                     </div>
                 </div>
             </div>
-
-            <footer class='absolute bottom-5 flex flex-row'>
+            <footer class='absolute xl:flex bottom-5 flex-row justify-center items-center hidden '>
                 <p class='text-slate-500 font-medium'>Powered by <span class='font-bold text-slate-600'>stripe</span></p>
                 <div class='mx-9 w-0.5 h-7 bg-black'></div>
                 <a href='#' class='text-slate-500 font-medium'>Terms</a>
                 <a href='#' class='text-slate-500 font-medium ml-5'>Privacy</a>
-
             </footer>
         </div>
 
     </main>
-    <aside
-        class='w-1/2 h-screen'
+    <aside class='w-full xl:w-1/2 xl:h-full mb-14'
     >
-        <div class='mt-40 mx-40'>
+        <div class='mx-20 mt-14 xl:mt-40 xl:mx-36'>
             <div class='w-full h-16 bg-black rounded-lg flex justify-center items-center'>
                 <img src='/logo.png' alt='logo' class='w-16' />
             </div>
@@ -55,7 +69,7 @@
                         <label for='cc' class='text-slate-500 font-medium'>Card Information</label>
                         <div class="flex row items-center relative">
                             <input type='number' placeholder='124 1234 1234 1234' id='cc' class='bg-white w-full h-12 border-2 border-slate-100 rounded-lg mt-2 px-4 placeholder:: text-lg font-medium' />
-                            <img src='/payments.png' alt='payments' class='absolute right-4 top-6' />
+                            <img src='/payments.png' alt='payments' class='absolute right-4 top-6 hidden xl:block' />
                         </div>
                         <div class="flex row items-center">
                             <input type='number' placeholder='MM/YY' id='cc' class='bg-white w-1/2 h-12 border-2 border-slate-100 rounded-lg px-4 placeholder:: text-lg font-medium' />
