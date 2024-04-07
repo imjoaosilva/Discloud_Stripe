@@ -1,5 +1,4 @@
 <script>
-    export let product_image = '';
     export let product;
 </script>
 

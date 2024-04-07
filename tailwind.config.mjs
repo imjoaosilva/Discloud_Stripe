@@ -7,6 +7,7 @@ export default {
 				"apple-pay-bg": "#3C4257",
 				"apple-pay-text": "#8792A2",
 				"promotional-text": "#635BFF",
+				"credit-card-text": "#9F9898",
 			}
 		},
 	},

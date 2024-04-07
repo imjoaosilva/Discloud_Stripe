@@ -2,6 +2,9 @@
     import {total} from '../stores/cart';
     import ProductList from "./ProductList.svelte";
     import {onMount} from "svelte";
+    import { CreditCardOutline } from 'flowbite-svelte-icons';
+
+    let selected = 0;
 
     onMount(() => {
         function footer() {
@@ -53,47 +56,39 @@
     <aside class='w-full xl:w-1/2 xl:h-full mb-14'
     >
         <div class='mx-20 mt-14 xl:mt-40 xl:mx-36'>
-            <div class='w-full h-16 bg-black rounded-lg flex justify-center items-center'>
-                <img src='/logo.png' alt='logo' class='w-16' />
-            </div>
-
-            <div class='bg-slate-100 h-0.5 w-full mt-8'></div>
-
-            <form class='mt-8'>
-                <div class='flex flex-col gap-6'>
-                    <div>
-                        <label for='email' class='text-slate-500 font-medium'>Email</label>
-                        <input type='email' id='email' class='bg-white w-full h-12 border-2 border-slate-100 rounded-lg mt-2 px-4' />
-                    </div>
-                    <div>
-                        <label for='cc' class='text-slate-500 font-medium'>Card Information</label>
-                        <div class="flex row items-center relative">
-                            <input type='number' placeholder='124 1234 1234 1234' id='cc' class='bg-white w-full h-12 border-2 border-slate-100 rounded-lg mt-2 px-4 placeholder:: text-lg font-medium' />
-                            <img src='/payments.png' alt='payments' class='absolute right-4 top-6 hidden xl:block' />
-                        </div>
-                        <div class="flex row items-center">
-                            <input type='number' placeholder='MM/YY' id='cc' class='bg-white w-1/2 h-12 border-2 border-slate-100 rounded-lg px-4 placeholder:: text-lg font-medium' />
-                            <input type='number' placeholder='CVC' id='cc' class='bg-white w-1/2 h-9 border-2 border-slate-100 rounded-lg mt-1 px-4 placeholder:: text-lg font-medium' />
-                        </div>
-                    </div>
-                    <div>
-                        <label for='card' class='text-slate-500 font-medium'>Name on Card</label>
-                        <input type='text' id='card' class='bg-white w-full h-12 border-2 border-slate-100 rounded-lg mt-2 px-4 placeholder:: text-lg font-medium' placeholder='Full name on card' />
-                    </div>
-
-                    <div>
-                        <label for='country' class='text-slate-500 font-medium'>Country or region</label>
-                        <select name="country" id="country" class='bg-white w-full h-10 border-2 border-b-0 border-slate-100 rounded-lg mt-2 px-4 placeholder:: text-lg font-medium'>
-                            <option value="Nigeria">United States</option>
-                            <option value="Ghana">Brazil</option>
-                            <option value="Kenya">Portugal</option>
-                        </select>
-                        <input type='text' id='zip' class='bg-white w-full h-12 border-2 border-slate-100 rounded-lg px-4 placeholder:: text-lg font-medium' placeholder='ZIP' />
-                    </div>
-
-                    <button class='w-full h-12 bg-apple-pay-bg border border-black text-apple-pay-text font-medium rounded-lg text-lg'>Pay ${$total}</button>
+            <div class="flex flex-row justify-around">
+                <div
+                    class="w-32 h-24 bg-white rounded-lg border flex flex-col p-2 hover:transition-all hover:border-blue-400 hover:border-2 {selected === 0 ? 'border-blue-500' : 'border-gray-200'}"
+                    on:click={() => selected = 0}
+                >
+                    <CreditCardOutline class="h-10 w-10 me-4 {selected === 0 ? 'text-blue-500' : 'text-gray-700'}" />
+                    <p class="text font-medium {selected === 0 ? 'text-blue-500' : 'text-gray-700'}">Card</p>
                 </div>
-            </form>
+                <div
+                    role="button"
+                    class="w-32 h-24 bg-white rounded-lg border flex flex-col p-2 hover:transition-all hover:border-blue-400 hover:border-2 {selected === 1 ? 'border-blue-500' : 'border-gray-200'}"
+                    on:click={() => selected = 1}
+                >
+                    <img src="/google-pay.svg" alt="google play" class="h-10 w-10 me-4" />
+                    <p class="text font-medium {selected === 1 ? 'text-blue-500' : 'text-gray-700'}">Google Pay</p>
+                </div>
+                <div
+                    role="button"
+                    class="w-32 h-24 bg-white rounded-lg border flex flex-col p-2 hover:transition-all hover:border-blue-400 hover:border-2 {selected === 2 ? 'border-blue-500' : 'border-gray-200'}"
+                    on:click={() => selected = 2}
+                >
+                    <img src="/google-pay.svg" alt="google play" class="h-10 w-10 me-4" />
+                    <p class="text font-medium {selected === 2 ? 'text-blue-500' : 'text-gray-700'}">Klarna</p>
+                </div>
+                <div
+                    role="button"
+                    class="w-32 h-24 bg-white rounded-lg border flex flex-col p-2 hover:transition-all hover:border-blue-400 hover:border-2 {selected === 3 ? 'border-blue-500' : 'border-gray-200'}"
+                    on:click={() => selected = 3}
+                >
+                    <img src="/google-pay.svg" alt="google play" class="h-10 w-10 me-4" />
+                    <p class="text font-medium {selected === 3 ? 'text-blue-500' : 'text-gray-700'}">US Account Bank</p>
+                </div>
+            </div>
         </div>
 
     </aside>
